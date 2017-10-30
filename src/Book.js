@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 class Book extends Component {
 
-  handleChange(event) {
-
+  handleChange = (event, book) => {
+    this.props.onShelfChange(book, event.target.value)
   }
 
   render() {
@@ -13,7 +13,7 @@ class Book extends Component {
         <div className="book-top">
           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${this.props.book.imageLinks.thumbnail})` }}></div>
             <div className="book-shelf-changer">
-            <select value={this.props.book.shelf} onChange={this.handleChange}>
+            <select value={this.props.book.shelf} onChange={(event) => this.handleChange(event, this.props.book)}>
               <option value="none" disabled>Move to...</option>
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>

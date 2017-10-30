@@ -22,6 +22,15 @@ class BooksApp extends React.Component {
     return this.state.books.filter((book) => (book.shelf === shelf))
   }
 
+  changeShelf = (book, shelf) => {
+    book.shelf = shelf
+    BooksAPI.update(book, shelf).then(() => {
+      this.setState(state => ({
+        books: state.books.concat([ book ])
+      }))
+    })
+  }
+
   render() {
     return (
       <div className="app">
@@ -56,19 +65,19 @@ class BooksApp extends React.Component {
               <div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Currently Reading</h2>
-                  <BookshelfBooks books={this.filterBooksForShelf("currentlyReading")} shelf="currentlyReading" />
+                  <BookshelfBooks books={this.filterBooksForShelf("currentlyReading")} shelf="currentlyReading" onShelfChange={(book, shelf) => this.changeShelf(book, shelf)} />
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Want to Read</h2>
-                  <BookshelfBooks books={this.filterBooksForShelf("wantToRead")} shelf="wantToRead" />
+                  <BookshelfBooks books={this.filterBooksForShelf("wantToRead")} shelf="wantToRead"  onShelfChange={(book, shelf) => this.changeShelf(book, shelf)}  />
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Read</h2>
-                  <BookshelfBooks books={this.filterBooksForShelf("read")} shelf="read" />
+                  <BookshelfBooks books={this.filterBooksForShelf("read")} shelf="read" onShelfChange={(book, shelf) => this.changeShelf(book, shelf)}  />
                 </div>
                 <div className="bookshelf">
                   <h2 className="bookshelf-title">Unsorted</h2>
-                  <BookshelfBooks books={this.filterBooksForShelf("none")} shelf="none" />
+                  <BookshelfBooks books={this.filterBooksForShelf("none")} shelf="none"  onShelfChange={(book, shelf) => this.changeShelf(book, shelf)}  />
                 </div>
               </div>
             </div>
