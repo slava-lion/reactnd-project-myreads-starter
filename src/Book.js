@@ -1,5 +1,4 @@
 import React, {Component} from 'react'
-import { Link } from 'react-router-dom'
 
 class Book extends Component {
 
@@ -8,6 +7,7 @@ class Book extends Component {
   }
 
   render() {
+
     return (
       <div className="book">
         <div className="book-top">
@@ -23,7 +23,9 @@ class Book extends Component {
           </div>
         </div>
         <div className="book-title">{this.props.book.title}</div>
-        <div className="book-authors">{this.props.book.authors.reduce((allAutors, newAuthor) => { return allAutors.length > 0 ? allAutors + ", " + newAuthor : newAuthor; }, "")}</div>
+        <div className="book-authors">
+          {(this.props.book.authors) ? this.props.book.authors.reduce((allAutors, newAuthor) => { return allAutors.length > 0 ? allAutors + ", " + newAuthor : newAuthor; }, "") : "" }
+        </div>
       </div>
     )
   }
