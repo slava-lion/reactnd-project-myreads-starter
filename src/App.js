@@ -57,10 +57,6 @@ class BooksApp extends React.Component {
                   <h2 className="bookshelf-title">Read</h2>
                   <BookshelfBooks books={this.filterBooksForShelf("read")} shelf="read" onShelfChange={(book, shelf) => this.changeShelf(book, shelf)}  />
                 </div>
-                <div className="bookshelf">
-                  <h2 className="bookshelf-title">Unsorted (Marked)</h2>
-                  <BookshelfBooks books={this.filterBooksForShelf("marked")} shelf="none"  onShelfChange={(book, shelf) => this.changeShelf(book, shelf)}  />
-                </div>
               </div>
             </div>
             <div className="open-search">

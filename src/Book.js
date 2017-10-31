@@ -13,6 +13,7 @@ class Book extends Component {
       <div className="book">
         <div className="book-top">
           <div className="book-cover" style={
+              // there were some books without images, which produced errors in console, so I added this check
               (typeof book.imageLinks !==	"undefined") ?
                 { width: 128, height: 193, backgroundImage: `url(${book.imageLinks.thumbnail})` }
                 : { width: 128, height: 193} }></div>
@@ -22,7 +23,7 @@ class Book extends Component {
               <option value="currentlyReading">Currently Reading</option>
               <option value="wantToRead">Want to Read</option>
               <option value="read">Read</option>
-              <option value="marked">Mark</option>
+              <option value="none">none</option>
             </select>
           </div>
         </div>
