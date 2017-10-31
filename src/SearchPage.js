@@ -71,12 +71,28 @@ class SearchPage extends Component {
           </div>
         </div>
         <div className="search-books-results">
-          <ol className="books-grid">
-            {this.state.searchedBooks.length > 0 ?
-              this.state.searchedBooks.map((book) =>
-                <li key={book.id}><Book book={book} onShelfChange={(book, shelf) => this.changeShelf(book, shelf)} /></li> )
-              : "Nothing was found" }
-          </ol>
+          <div className="list-books-content">
+            <div>
+              <div className="bookshelf">
+                <h2 className="bookshelf-title">Founded Books on your shelf</h2>
+                <ol className="books-grid">
+                  {this.state.searchedBooks.length > 0 ?
+                    this.state.searchedBooks.filter((book) => book.inMyBooks).map((book) =>
+                      <li key={book.id}><Book book={book} onShelfChange={(book, shelf) => this.changeShelf(book, shelf)} /></li> )
+                    : "Nothing was found" }
+                </ol>
+              </div>
+              <div className="bookshelf">
+                <h2 className="bookshelf-title">Founded new book</h2>
+                <ol className="books-grid">
+                  {this.state.searchedBooks.length > 0 ?
+                    this.state.searchedBooks.filter((book) => !book.inMyBooks).map((book) =>
+                      <li key={book.id}><Book book={book} onShelfChange={(book, shelf) => this.changeShelf(book, shelf)} /></li> )
+                    : "Nothing was found" }
+                </ol>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     )
