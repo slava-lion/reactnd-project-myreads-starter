@@ -36,7 +36,7 @@ class BooksApp extends React.Component {
     return (
       <div className="app">
         <Route exact path="/search" render={() => (
-          <SearchPage onShelfChange={(book, shelf) => this.changeShelf(book, shelf)} />
+          <SearchPage myBooks={this.state.books} onShelfChange={(book, shelf) => this.changeShelf(book, shelf)} />
         )}/>
         <Route exact path="/" render={() => (
           <div className="list-books">
@@ -58,8 +58,8 @@ class BooksApp extends React.Component {
                   <BookshelfBooks books={this.filterBooksForShelf("read")} shelf="read" onShelfChange={(book, shelf) => this.changeShelf(book, shelf)}  />
                 </div>
                 <div className="bookshelf">
-                  <h2 className="bookshelf-title">Unsorted</h2>
-                  <BookshelfBooks books={this.filterBooksForShelf("none")} shelf="none"  onShelfChange={(book, shelf) => this.changeShelf(book, shelf)}  />
+                  <h2 className="bookshelf-title">Unsorted (Marked)</h2>
+                  <BookshelfBooks books={this.filterBooksForShelf("marked")} shelf="none"  onShelfChange={(book, shelf) => this.changeShelf(book, shelf)}  />
                 </div>
               </div>
             </div>

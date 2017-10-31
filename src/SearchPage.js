@@ -17,13 +17,30 @@ class SearchPage extends Component {
     BooksAPI.search(query, this.state.maxResults).then((response) => {
       if(response.length > 0) {
         response.map((book) => {
-          searchedBooks.push(book)
+          // I am looking for a book in state, because the book may be not in stock anymore
+          // if we will suppose, that I can read only books, which are in stock,
+          // then I can simply use BooksAPI.get(book.id) method, but it will cause more request to the server
+          let foundedBooks = this.findBookInMyBooks(book)
+          console.log(JSON.stringify(foundedBooks))
+          if(foundedBooks.length > 0)
+            // actually for every id there should be only 1 book,
+            // so I should get in foundedBooks from findBookInMyBooks array with 1 element or empty array
+            foundedBooks.map((foundBook) => {
+              foundBook.inMyBooks = true
+              searchedBooks.push(foundBook)
+            })
+          else
+            searchedBooks.push(book)
           this.setState({ searchedBooks })
         })
       } else {
         this.setState({ searchedBooks })
       }
     })
+  }
+
+  findBookInMyBooks = (book) => {
+    return this.props.myBooks.filter((myBook) => (myBook.id === book.id))
   }
 
   changeShelf = (book, shelf) => {
